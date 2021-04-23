@@ -54,18 +54,16 @@ server.get("/firstPage", (req, res) => {
 //   // POST
 server.post("/postDesitination", (req, res) => {
   console.log(req.body);
+  let newDestination = createDestination(
+    "1234567",
+    req.body.location,
+    req.body.discription,
+    "photo url",
+    req.body.destinationName
+  );
   // TODO:
-  // insertDestination(
-  //   clientDB,
-  //   createDestination(
-  //     "1234567",
-  //     "seattle",
-  //     "where i live",
-  //     "photo url",
-  //     "space needle"
-  //   )
-  // );
-  res.send("inserted");
+  insertDestination(clientDB, newDestination);
+  res.send(newDestination);
 });
 
 // PUT
