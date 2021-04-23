@@ -5,6 +5,8 @@ const clientDB = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+const databaseName = "destinations";
+const collectionName = "listOfDestinations";
 
 async function main() {
   try {
@@ -25,16 +27,14 @@ async function listDB(clientDB) {
 
 async function insertDestination(clientDB, newListing) {
   const result = await clientDB
-    .db("destinations")
-    .collection("listOfDestinations")
+    .db(databaseName)
+    .collection(collectionName)
     .insertOne(newListing);
   console.log(`New destination was created with id:${result.insertedId}`);
 }
 
 async function deleteAllDestination(clientDB) {
-  const result = await clientDB
-    .db("destinations")
-    .collection("listOfDestinations");
+  const result = await clientDB.db(databaseName).collection(collectionName);
   if (result !== undefined) {
     result.drop();
   }
@@ -43,8 +43,8 @@ async function deleteAllDestination(clientDB) {
 
 async function deleteDestinationByUid(clientDB, uid) {
   const result = await clientDB
-    .db("destinations")
-    .collection("listOfDestinations")
+    .db(databaseName)
+    .collection(collectionName)
     .deleteOne({ uid: uid });
   console.log(`Destination with UID ${uid} was removed ${result}`);
 }

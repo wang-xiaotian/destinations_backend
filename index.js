@@ -5,6 +5,9 @@
 const defaultImg =
   "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80";
 
+const unsplashAPI =
+  "https://api.unsplash.com/search/photos?client_id=CLnWpARpr78PvJHV7Y6ApKdMDkFoxb2eqr_UxKHeO5g&page=1&query=";
+
 const {
   main,
   insertDestination,
@@ -52,20 +55,17 @@ server.get("/firstPage", (req, res) => {
 server.post("/postDesitination", (req, res) => {
   console.log(req.body);
   // TODO:
-  insertDestination(
-    clientDB,
-    createDestination(
-      "1234567",
-      "seattle",
-      "where i live",
-      "photo url",
-      "space needle"
-    )
-  );
+  // insertDestination(
+  //   clientDB,
+  //   createDestination(
+  //     "1234567",
+  //     "seattle",
+  //     "where i live",
+  //     "photo url",
+  //     "space needle"
+  //   )
+  // );
   res.send("inserted");
-  //   db.main(server).then((x) => {
-  //     res.redirect("/");
-  //   });
 });
 
 // PUT
@@ -92,7 +92,26 @@ server.delete("/deleteDestinationByUid", (req, res) => {
 });
 
 function createDestination(uid, location, description, photo, name) {
-  return { uid, location, description, photo, name };
+  let photoUrl = query(location).then((response) => {
+    let images = response.results;
+    let url = images[random(images.length)].urls.thumb;
+    return { uid, location, description, photo, name };
+  });
+}
+
+// generate random index number for an array
+function random(x) {
+  return Math.floor(Math.random() * x);
+}
+
+async function query(term) {
+  let api = unsplashAPI + term;
+  try {
+    const res = await axios.get(api);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 const localDB = [
