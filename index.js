@@ -40,7 +40,7 @@ main();
 
 //   // GET / => READ
 
-server.get("/", (req, res) => {
+server.get("/firstPage", (req, res) => {
   //res.sendFile(__dirname + "/index.html");
   res.send(localDB[0]);
 });
