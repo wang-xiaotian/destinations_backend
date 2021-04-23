@@ -39,18 +39,20 @@ main();
 //   //console.log(collection);
 
 //   // GET / => READ
+
 server.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  //res.sendFile(__dirname + "/index.html");
+  res.send(localDB[0]);
 });
 
 //   // POST
 server.post("/postDesitination", (req, res) => {
   console.log(req.body);
-  // TODO: 
+  // TODO:
   insertDestination(
     clientDB,
     createDestination(
-      ,
+      "1234567",
       "seattle",
       "where i live",
       "photo url",
