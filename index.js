@@ -16,7 +16,7 @@ const bodyParser = require("body-parser");
 //require express
 const express = require("express");
 const server = express();
-server.use("/firstPage", cors());
+server.use(cors());
 server.use(bodyParser.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 3000; // 3000 or server system defined
 
