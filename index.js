@@ -53,7 +53,7 @@ server.get("/firstPage", (req, res) => {
 
 //   // POST
 server.post("/postDesitination", (req, res) => {
-  console.log(req.body);
+  console.log(req);
   // TODO:
   // insertDestination(
   //   clientDB,
