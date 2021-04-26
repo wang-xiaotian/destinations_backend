@@ -72,7 +72,7 @@ server.get("/firstLoad", (req, res) => {
   //   name: "train station",
   // });
   //getAllDestinations(clientDB).then((list) => res.send(list));
-  let url = query("seattle")[0];
+  let url = query("seattle");
   res.send(url);
 });
 
