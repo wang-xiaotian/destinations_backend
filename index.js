@@ -14,7 +14,7 @@ const {
   clientDB,
   deleteAllDestination,
   deleteDestinationByUid,
-} = require("./localDB/index");
+} = require("./database/index");
 const cors = require("cors");
 const axios = require("axios");
 const bodyParser = require("body-parser");
@@ -30,28 +30,13 @@ server.listen(PORT, () => {
   console.log(`Listening Port...${PORT}`);
 });
 
-main();
+main(); // connect to data base
 // CRUD
 // functions:   create  read    update  delete
 // methods:     post    get     put     delete
 
 // POST : sending post request to server
 // expects {name, location, description} from user
-
-// dbClient.connect(async (err) => {
-//   const collection = dbClient.db("destination").collection("devices");
-//   // perform actions on the collection object
-//   console.log("Connected to MongoDB");
-//   //console.log(collection);
-
-//   // GET / => READ
-
-server.get("/firstPage", (req, res) => {
-  //res.sendFile(__dirname + "/index.html");
-  res.send(localDB[0]);
-});
-
-//   // POST
 server.post("/postDesitination", (req, res) => {
   console.log(req.body);
   let newDestination = createDestination(
@@ -66,6 +51,12 @@ server.post("/postDesitination", (req, res) => {
   res.send(newDestination);
 });
 
+// GET / => READ
+server.get("/firstLoad", (req, res) => {
+  // get a list of destination
+  res.send(localDB[0]);
+});
+
 // PUT
 server.put("/putDestination", (req, res) => {
   //insertDestination(clientDB, localDB[0]);
@@ -73,22 +64,26 @@ server.put("/putDestination", (req, res) => {
   console.log(req.query.uid);
   console.log(req.query.description);
   console.log(req.body);
-  //   localDB.push(
-  //     createDestination(req.query.uid, "", req.query.description, "", "", "")
-  //   );
+  // find
+
+  // update
+
   res.send(localDB);
 });
 
+// delete all destination in database
 server.delete("/deleteAllDestination", (req, res) => {
   deleteAllDestination(clientDB);
   res.send("deleted all");
 });
 
+// delete destination by uid
 server.delete("/deleteDestinationByUid", (req, res) => {
   deleteDestinationByUid(clientDB, req.query.uid);
   res.send("delete uid");
 });
 
+// return json destination {uid, location, description, photo, name}
 function createDestination(uid, location, description, photo, name) {
   let photoUrl = query(location).then((response) => {
     let images = response.results;
@@ -102,6 +97,7 @@ function random(x) {
   return Math.floor(Math.random() * x);
 }
 
+// return unsplash api data - img url
 async function query(term) {
   let api = unsplashAPI + term;
   try {
@@ -111,20 +107,3 @@ async function query(term) {
     console.log(error);
   }
 }
-
-const localDB = [
-  {
-    uid: 23456,
-    name: "Efiile tower",
-    location: "Paris",
-    photo: defaultImg,
-    description: "Romantic place",
-  },
-  {
-    uid: 34567,
-    name: "The needle",
-    location: "Seattle",
-    photo: defaultImg,
-    description: "Another Romantic place",
-  },
-];
