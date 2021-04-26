@@ -104,6 +104,7 @@ async function query(term) {
   let api = unsplashAPI + term;
   try {
     const res = await axios.get(api);
+    res.headers["access-control-allow-origin"];
     return res.data;
   } catch (error) {
     console.log(error);
