@@ -35,7 +35,8 @@ async function insertDestination(clientDB, newListing) {
 
 // return the list of all destinations
 async function getAllDestinations(clientDB) {
-  return await clientDB.db(databaseName).collection(collectionName);
+  let list = await clientDB.db(databaseName).collection(collectionName);
+  return list;
 }
 
 // delete all destinations from database

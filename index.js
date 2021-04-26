@@ -54,6 +54,7 @@ server.post("/postDesitination", (req, res) => {
 // GET / => READ
 server.get("/firstLoad", (req, res) => {
   // get a list of destination
+  console.log("firstLoad server");
   getAllDestinations(clientDB).then((list) => res.send(list));
 });
 
