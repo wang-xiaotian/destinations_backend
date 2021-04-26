@@ -14,6 +14,7 @@ const {
   clientDB,
   deleteAllDestination,
   deleteDestinationByUid,
+  getAllDestinations,
 } = require("./database/index.js");
 const express = require("express");
 const cors = require("cors");
@@ -53,7 +54,7 @@ server.post("/postDesitination", (req, res) => {
 // GET / => READ
 server.get("/firstLoad", (req, res) => {
   // get a list of destination
-  res.send(getAllDestinations(clientDB));
+  getAllDestinations(clientDB).then((list) => res.send(list));
 });
 
 // PUT
