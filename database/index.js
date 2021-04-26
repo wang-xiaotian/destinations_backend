@@ -42,7 +42,8 @@ async function getAllDestinations(clientDB) {
   let list = await clientDB
     .db(databaseName)
     .collection(collectionName)
-    .find({});
+    .find({})
+    .toArray();
   return list;
 }
 
