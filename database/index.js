@@ -45,6 +45,7 @@ async function getAllDestinations(clientDB) {
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;
+      console.log(result);
       return result;
     });
 }
