@@ -42,12 +42,8 @@ async function getAllDestinations(clientDB) {
   let list = await clientDB
     .db(databaseName)
     .collection(collectionName)
-    .find({})
-    .toArray(function (err, result) {
-      if (err) throw err;
-      console.log(result);
-      return result;
-    });
+    .find({});
+  return list;
 }
 
 // delete all destinations from database
