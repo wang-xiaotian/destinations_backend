@@ -8,22 +8,22 @@ const defaultImg =
 const unsplashAPI =
   "https://api.unsplash.com/search/photos?client_id=CLnWpARpr78PvJHV7Y6ApKdMDkFoxb2eqr_UxKHeO5g&page=1&query=";
 
-const {
+import {
   main,
   insertDestination,
   clientDB,
   deleteAllDestination,
   deleteDestinationByUid,
-} = require("./database/index");
-const cors = require("cors");
-const axios = require("axios");
-const bodyParser = require("body-parser");
+} from "./database/index";
+import express from "express";
+import cors from "cors";
+import { get } from "axios";
+import { urlencoded } from "body-parser";
 
 //require express
-const express = require("express");
 const server = express();
 server.use(cors());
-server.use(bodyParser.urlencoded({ extended: true }));
+server.use(urlencoded({ extended: true }));
 const PORT = process.env.PORT || 3000; // 3000 or server system defined
 
 server.listen(PORT, () => {
@@ -101,7 +101,7 @@ function random(x) {
 async function query(term) {
   let api = unsplashAPI + term;
   try {
-    const res = await axios.get(api);
+    const res = await get(api);
     return res.data;
   } catch (error) {
     console.log(error);
