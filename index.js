@@ -1,3 +1,5 @@
+var requireDirectory = require("require-directory");
+module.exports = requireDirectory(module);
 // database
 // const main = require("./localDB/index").main;
 // const insertDestination = require("./localDB/index").insertDestination;
