@@ -61,4 +61,5 @@ module.exports = {
   insertDestination,
   deleteAllDestination,
   deleteDestinationByUid,
+  getAllDestinations,
 };

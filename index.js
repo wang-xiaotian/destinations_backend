@@ -53,7 +53,7 @@ server.post("/postDesitination", (req, res) => {
 // GET / => READ
 server.get("/firstLoad", (req, res) => {
   // get a list of destination
-  res.send(localDB[0]);
+  res.send(getAllDestinations());
 });
 
 // PUT
