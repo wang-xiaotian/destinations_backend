@@ -45,7 +45,6 @@ server.post("/postDesitination", (req, res) => {
       "1234567",
       req.body.location,
       req.body.discription,
-      "photo url",
       req.body.destinationName
     );
     // TODO:
@@ -90,11 +89,11 @@ server.delete("/deleteDestinationByUid", (req, res) => {
 });
 
 // return json destination {uid, location, description, photo, name}
-function createDestination(uid, location, description, photo, name) {
+function createDestination(uid, location, description, name) {
   query(location).then((response) => {
     let images = response.results;
     let url = images[random(images.length)].urls.thumb;
-    return { uid, location, description, photo, name };
+    return { uid, location, description, url, name };
   });
 }
 

@@ -31,11 +31,7 @@ async function insertDestination(clientDB, newListing) {
       .db(databaseName)
       .collection(collectionName)
       .insertOne(newListing);
-    if (result != null) {
-      console.log(`New destination was created with id:${result.insertedId}`);
-    } else {
-      console.log(`New destination was created with id:${result}`);
-    }
+    console.log("new destination inserted");
   } catch (error) {
     console.log(error);
   }
