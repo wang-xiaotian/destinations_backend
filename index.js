@@ -23,7 +23,7 @@ const bodyParser = require("body-parser");
 
 //require express
 const server = express();
-server.use(cors());
+server.use("https://api.unsplash.com/", cors());
 //server.use(bodyParser());
 server.use(bodyParser.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 3000; // 3000 or server system defined
@@ -115,7 +115,7 @@ async function query(term) {
   let api = unsplashAPI + term;
   try {
     const res = await axios.get(api);
-    res.headers["access-control-allow-origin"];
+    //res.headers["access-control-allow-origin"] = "*";
     return res.data;
   } catch (error) {
     console.log(error);
