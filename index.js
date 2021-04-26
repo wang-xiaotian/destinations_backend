@@ -71,8 +71,9 @@ server.get("/firstLoad", (req, res) => {
   //   photo: "url",
   //   name: "train station",
   // });
-  res;
-  getAllDestinations(clientDB).then((list) => res.send(list));
+  //getAllDestinations(clientDB).then((list) => res.send(list));
+  let url = query("seattle")[0];
+  res.send(url);
 });
 
 // PUT
