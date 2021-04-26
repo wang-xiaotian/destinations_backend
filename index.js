@@ -63,7 +63,6 @@ server.post("/postDesitination", (req, res) => {
 // GET / => READ
 server.get("/firstLoad", (req, res) => {
   // get a list of destination
-  console.log("firstLoad server");
   // insertDestination(clientDB, {
   //   uid: "12345",
   //   location: "puyallup",
@@ -72,9 +71,12 @@ server.get("/firstLoad", (req, res) => {
   //   name: "train station",
   // });
   //getAllDestinations(clientDB).then((list) => res.send(list));
-  let data = getAllDestinations(clientDB);
-  console.log(data);
-  res.send(data);
+  let data = getAllDestinations(clientDB).then((result) => {
+    console.log("firstLoad server");
+
+    console.log(data);
+    res.send(data);
+  });
 });
 
 // PUT
