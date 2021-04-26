@@ -72,10 +72,9 @@ server.get("/firstLoad", (req, res) => {
   // });
   //getAllDestinations(clientDB).then((list) => res.send(list));
   let data = getAllDestinations(clientDB).then((result) => {
-    console.log("firstLoad server");
+    console.log(result);
     res.send(result);
   });
-  console.log(data);
 });
 
 // PUT
