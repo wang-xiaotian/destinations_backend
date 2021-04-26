@@ -26,11 +26,19 @@ async function listDB(clientDB) {
 
 // insert one destination in database
 async function insertDestination(clientDB, newListing) {
-  const result = await clientDB
-    .db(databaseName)
-    .collection(collectionName)
-    .insertOne(newListing);
-  console.log(`New destination was created with id:${result.insertedId}`);
+  try {
+    const result = await clientDB
+      .db(databaseName)
+      .collection(collectionName)
+      .insertOne(newListing);
+    if (result != null) {
+      console.log(`New destination was created with id:${result.insertedId}`);
+    } else {
+      console.log(`New destination was created with id:${result}`);
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 // return the list of all destinations
