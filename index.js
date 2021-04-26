@@ -30,6 +30,7 @@ const PORT = process.env.PORT || 3000; // 3000 or server system defined
 server.listen(PORT, () => {
   console.log(`Listening Port...${PORT}`);
 });
+main(); // connect to data base
 
 // CRUD
 // functions:   create  read    update  delete
@@ -108,5 +109,3 @@ async function query(term) {
     console.log(error);
   }
 }
-
-main(); // connect to data base
