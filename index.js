@@ -72,12 +72,7 @@ server.get("/firstLoad", (req, res) => {
   //   name: "train station",
   // });
   //getAllDestinations(clientDB).then((list) => res.send(list));
-  let data = getAllDestinations(clientDB).toArray(function (err, result) {
-    if (err) throw err;
-    console.log("sending response firstLoad");
-    //console.log(result);
-    return result;
-  });
+  let data = getAllDestinations(clientDB);
   console.log(data);
   res.send(data);
 });
