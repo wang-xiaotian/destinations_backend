@@ -23,7 +23,11 @@ const bodyParser = require("body-parser");
 
 //require express
 const server = express();
-server.use("https://api.unsplash.com/", cors());
+server.use(cors());
+server.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+});
 //server.use(bodyParser());
 server.use(bodyParser.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 3000; // 3000 or server system defined
@@ -60,13 +64,14 @@ server.post("/postDesitination", (req, res) => {
 server.get("/firstLoad", (req, res) => {
   // get a list of destination
   console.log("firstLoad server");
-  insertDestination(clientDB, {
-    uid: "12345",
-    location: "puyallup",
-    description: "somewhere",
-    photo: "url",
-    name: "train station",
-  });
+  // insertDestination(clientDB, {
+  //   uid: "12345",
+  //   location: "puyallup",
+  //   description: "somewhere",
+  //   photo: "url",
+  //   name: "train station",
+  // });
+  res;
   getAllDestinations(clientDB).then((list) => res.send(list));
 });
 
