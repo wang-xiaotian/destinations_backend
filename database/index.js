@@ -44,6 +44,8 @@ async function getAllDestinations(clientDB) {
     .collection(collectionName)
     .find({})
     .toArray();
+  console.log("in get all destinations");
+  console.log(list);
   return list;
 }
 
