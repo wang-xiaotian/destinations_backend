@@ -1,5 +1,3 @@
-var requireDirectory = require("require-directory");
-module.exports = requireDirectory(module);
 // database
 // const main = require("./localDB/index").main;
 // const insertDestination = require("./localDB/index").insertDestination;
@@ -16,7 +14,7 @@ const {
   clientDB,
   deleteAllDestination,
   deleteDestinationByUid,
-} = require("./database");
+} = require("./database/index.js");
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
