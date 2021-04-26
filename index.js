@@ -40,16 +40,20 @@ main(); // connect to data base
 // expects {name, location, description} from user
 server.post("/postDesitination", (req, res) => {
   console.log(req.body);
-  let newDestination = createDestination(
-    "1234567",
-    req.body.location,
-    req.body.discription,
-    "photo url",
-    req.body.destinationName
-  );
-  // TODO:
-  insertDestination(clientDB, newDestination);
-  res.send(newDestination);
+  try {
+    let newDestination = createDestination(
+      "1234567",
+      req.body.location,
+      req.body.discription,
+      "photo url",
+      req.body.destinationName
+    );
+    // TODO:
+    insertDestination(clientDB, newDestination);
+    res.send(newDestination);
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 // GET / => READ
@@ -87,7 +91,7 @@ server.delete("/deleteDestinationByUid", (req, res) => {
 
 // return json destination {uid, location, description, photo, name}
 function createDestination(uid, location, description, photo, name) {
-  let photoUrl = query(location).then((response) => {
+  query(location).then((response) => {
     let images = response.results;
     let url = images[random(images.length)].urls.thumb;
     return { uid, location, description, photo, name };
